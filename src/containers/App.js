@@ -6,6 +6,7 @@ import Header from './Header';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import {
   SaveImage as SaveImageAction
@@ -18,14 +19,7 @@ import {
 }))
 
 class App extends React.Component {
-  onClearButtonClick() {
-    const fabricCanvas = window.fabricCanvas;
-    fabricCanvas.clear();
-    fabricCanvas.backgroundColor = '#000000';
-  }
-
   render() {
-
     return (
       <React.Fragment>
         <Header />
@@ -34,17 +28,25 @@ class App extends React.Component {
             Allow trusted CORs requests
           </Typography>
         </Paper>
+        <div class="list-panel">
+        <TextField
+          id="outlined-bare"
+          defaultValue="http://localhost:30030"
+          margin="normal"
+          inputProps={{ 'aria-label': 'bare' }}
+        />
+        </div>
         <Button variant="contained" color="primary">Request</Button>
 
         <Paper className='result-panel'>
           <Typography variant="body1" component="h3">
-            Allow trusted CORs requests
+            Obtain context info about users, rooms
           </Typography>
         </Paper>
-        <Button variant="contained" color="primary">Test</Button>
-        <Button variant="contained" color="primary">Test</Button>
-        <Button variant="contained" color="primary">Test</Button>
-        <Button variant="contained" color="primary">Test</Button>
+        <Button variant="contained" color="primary">getUserId</Button>
+        <Button variant="contained" color="primary">getUserName</Button>
+        <Button variant="contained" color="primary">getRoomName</Button>
+        <Button variant="contained" color="primary">getRoomId</Button>
       </React.Fragment>
     );
   }
