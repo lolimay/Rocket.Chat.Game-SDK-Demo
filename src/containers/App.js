@@ -8,6 +8,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
+import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
+
 import {
   SaveImage as SaveImageAction
 } from '../actions/App';
@@ -19,6 +23,23 @@ import {
 }))
 
 class App extends React.Component {
+  componentDidMount() {
+    toast.configure();
+  }
+
+  onRequestClick = async () => {
+    const { value } = document.querySelector('#request-url-input');
+    const { data } = await axios.get(value);
+    toast.info(JSON.stringify(data, null, 4), {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -28,15 +49,15 @@ class App extends React.Component {
             Allow trusted CORs requests
           </Typography>
         </Paper>
-        <div class="list-panel">
-        <TextField
-          id="outlined-bare"
-          defaultValue="http://localhost:30030"
-          margin="normal"
-          inputProps={{ 'aria-label': 'bare' }}
-        />
+        <div>
+          <TextField
+            id="request-url-input"
+            defaultValue="http://localhost:30030"
+            margin="normal"
+            inputProps={{ 'aria-label': 'bare' }}
+          />
         </div>
-        <Button variant="contained" color="primary">Request</Button>
+        <Button variant="contained" color="primary" onClick={this.onRequestClick}>Request</Button>
 
         <Paper className='result-panel'>
           <Typography variant="body1" component="h3">
@@ -47,6 +68,17 @@ class App extends React.Component {
         <Button variant="contained" color="primary">getUserName</Button>
         <Button variant="contained" color="primary">getRoomName</Button>
         <Button variant="contained" color="primary">getRoomId</Button>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
       </React.Fragment>
     );
   }
