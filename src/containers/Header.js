@@ -5,7 +5,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header style={headerStyle}>
-				<Title>Rocket.Chat SDK Demo</Title>
+				<Title>Rocket.Chat Game SDK Demo</Title>
 			</header>
 		);
 	}
