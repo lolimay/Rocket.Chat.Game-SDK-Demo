@@ -1,8 +1,25 @@
-const http = require('http')
-const url = require('url')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
+const port = 30030;
 
-const port = 30030
-http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
-    res.end(JSON.stringify({ success: true, text: 'Hello, World!' }));
-}).listen(port)
+const corsOptions = {
+  origin: ["http://localhost:1234", "http://localhost:3000"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+app.post("/", function(req, res) {
+  console.log(req.body);
+});
+
+app.get("/", function(req, res) {
+  res.end(JSON.stringify({ success: true }));
+  console.log(req.body);
+});
+
+app.listen(port);
