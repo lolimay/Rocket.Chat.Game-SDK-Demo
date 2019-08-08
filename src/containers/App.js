@@ -16,6 +16,8 @@ import {
   SaveImage as SaveImageAction
 } from '../actions/App';
 
+import { AppEmbeddedSDK } from '../lib/client/AppEmbeddedSDK';
+
 @connect(state => ({
   number: state.App.number
 }), dispatch => ({
@@ -40,6 +42,24 @@ class App extends React.Component {
     });
   }
 
+  async getUserInfo() {
+    const sdk = new AppEmbeddedSDK();
+    const user = await sdk.getUserInfo();
+    console.log(JSON.stringify(user, null, 4));
+  }
+
+  async getRoomInfo() {
+    const sdk = new AppEmbeddedSDK();
+    const room = await sdk.getRoomInfo();
+    console.log(JSON.stringify(room, null, 4));
+  }
+
+  async getSessionId() {
+    const sdk = new AppEmbeddedSDK();
+    const sessionId = await sdk.getSessionId();
+    console.log(JSON.stringify(sessionId, null, 4));
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -61,13 +81,18 @@ class App extends React.Component {
 
         <Paper className='result-panel'>
           <Typography variant="body1" component="h3">
-            Obtain context info about users, rooms
+            Obtain context info about users
           </Typography>
         </Paper>
-        <Button variant="contained" color="primary">getUserId</Button>
-        <Button variant="contained" color="primary">getUserName</Button>
-        <Button variant="contained" color="primary">getRoomName</Button>
-        <Button variant="contained" color="primary">getRoomId</Button>
+        <Button variant="contained" color="primary" onClick={this.getUserInfo}>getUserInfo</Button>
+
+        <Paper className='result-panel'>
+          <Typography variant="body1" component="h3">
+            Obtain context info about rooms
+          </Typography>
+        </Paper>        
+        <Button variant="contained" color="primary" onClick={this.getRoomInfo}>getRoomInfo</Button>
+
         <ToastContainer
           position="top-center"
           autoClose={5000}
