@@ -1,6 +1,6 @@
 # Rocket.Chat.Game-SDK-Demo
 
-This is the demo that shows how the AppEmbeddedSDK works. Below are the steps to help you get start.
+This is the demo that shows how the AppEmbeddedSDK works. Below are the steps to help you start.
 
 1. Clone the Apps.engine repo and checkout the `alpha` branch
 ```bash
