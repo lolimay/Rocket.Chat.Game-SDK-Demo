@@ -9,7 +9,7 @@ cd Rocket.Chat.Apps-engine
 git checkout -b alpha origin/alpha
 ```
 
-2. Install the depencies and compile
+2. Install the depencies and compile the project
 ```bash
 npm install
 npm run compile
