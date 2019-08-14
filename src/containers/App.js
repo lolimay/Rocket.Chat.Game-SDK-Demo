@@ -16,8 +16,6 @@ import {
   SaveImage as SaveImageAction
 } from '../actions/App';
 
-import { AppEmbeddedSDK } from '../lib/client/AppEmbeddedSDK';
-
 @connect(state => ({
   number: state.App.number
 }), dispatch => ({
@@ -25,7 +23,7 @@ import { AppEmbeddedSDK } from '../lib/client/AppEmbeddedSDK';
 }))
 
 class App extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     toast.configure();
   }
 
@@ -43,21 +41,14 @@ class App extends React.Component {
   }
 
   async getUserInfo() {
-    const sdk = new AppEmbeddedSDK();
-    const user = await sdk.getUserInfo();
+    console.log(this.sdk.getRoomInfo);
+    const user = await this.sdk.getUserInfo();
     console.log(JSON.stringify(user, null, 4));
   }
 
   async getRoomInfo() {
-    const sdk = new AppEmbeddedSDK();
-    const room = await sdk.getRoomInfo();
+    const room = await this.sdk.getRoomInfo();
     console.log(JSON.stringify(room, null, 4));
-  }
-
-  async getSessionId() {
-    const sdk = new AppEmbeddedSDK();
-    const sessionId = await sdk.getSessionId();
-    console.log(JSON.stringify(sessionId, null, 4));
   }
 
   render() {
